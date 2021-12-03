@@ -24,6 +24,7 @@ public enum CategTokens {
     PR_BOOL,
     PR_INPUT,
     PR_OUTPUT,
+    PR_OUTPUTNL,
     PR_TRUE,
     PR_FALSE,
     BOOL_VALUE,

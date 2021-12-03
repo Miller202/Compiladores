@@ -27,6 +27,7 @@ public class WordsHashTable {
         reserved_word.put("Bool", CategTokens.PR_BOOL);
         reserved_word.put("Input", CategTokens.PR_INPUT);
         reserved_word.put("Output", CategTokens.PR_OUTPUT);
+        reserved_word.put("Outputnl", CategTokens.PR_OUTPUTNL);
         reserved_word.put("True", CategTokens.PR_TRUE);
         reserved_word.put("False", CategTokens.PR_FALSE);
     }
