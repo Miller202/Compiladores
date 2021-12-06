@@ -4,32 +4,32 @@ import java.util.Hashtable;
 
 public class WordsHashTable {
 
-    Hashtable<String, CategTokens> reserved_word = new Hashtable<>();
+    Hashtable<String, CategTokens> reservedWord = new Hashtable<>();
 
     public WordsHashTable(){
-        reserved_word.put("Begin", CategTokens.PR_BEGIN);
-        reserved_word.put("End", CategTokens.PR_END);
-        reserved_word.put("Funct", CategTokens.PR_FUNCTION);
-        reserved_word.put("Main", CategTokens.PR_MAIN);
-        reserved_word.put("Void", CategTokens.PR_VOID);
-        reserved_word.put("Null", CategTokens.PR_NULL);
-        reserved_word.put("Return", CategTokens.PR_RETURN);
-        reserved_word.put("And", CategTokens.PR_AND);
-        reserved_word.put("Or", CategTokens.PR_OR);
-        reserved_word.put("If", CategTokens.PR_IF);
-        reserved_word.put("Else", CategTokens.PR_ELSE);
-        reserved_word.put("While", CategTokens.PR_WHILE);
-        reserved_word.put("For", CategTokens.PR_FOR);
-        reserved_word.put("Int", CategTokens.PR_INT);
-        reserved_word.put("Float", CategTokens.PR_FLOAT);
-        reserved_word.put("Char", CategTokens.PR_CHAR);
-        reserved_word.put("Str", CategTokens.PR_STR);
-        reserved_word.put("Bool", CategTokens.PR_BOOL);
-        reserved_word.put("Input", CategTokens.PR_INPUT);
-        reserved_word.put("Output", CategTokens.PR_OUTPUT);
-        reserved_word.put("Outputnl", CategTokens.PR_OUTPUTNL);
-        reserved_word.put("True", CategTokens.PR_TRUE);
-        reserved_word.put("False", CategTokens.PR_FALSE);
+        reservedWord.put("Begin", CategTokens.PR_BEGIN);
+        reservedWord.put("End", CategTokens.PR_END);
+        reservedWord.put("Funct", CategTokens.PR_FUNCTION);
+        reservedWord.put("Main", CategTokens.PR_MAIN);
+        reservedWord.put("Void", CategTokens.PR_VOID);
+        reservedWord.put("Null", CategTokens.PR_NULL);
+        reservedWord.put("Return", CategTokens.PR_RETURN);
+        reservedWord.put("And", CategTokens.PR_AND);
+        reservedWord.put("Or", CategTokens.PR_OR);
+        reservedWord.put("If", CategTokens.PR_IF);
+        reservedWord.put("Else", CategTokens.PR_ELSE);
+        reservedWord.put("While", CategTokens.PR_WHILE);
+        reservedWord.put("For", CategTokens.PR_FOR);
+        reservedWord.put("Int", CategTokens.PR_INT);
+        reservedWord.put("Float", CategTokens.PR_FLOAT);
+        reservedWord.put("Char", CategTokens.PR_CHAR);
+        reservedWord.put("Str", CategTokens.PR_STR);
+        reservedWord.put("Bool", CategTokens.PR_BOOL);
+        reservedWord.put("Input", CategTokens.PR_INPUT);
+        reservedWord.put("Output", CategTokens.PR_OUTPUT);
+        reservedWord.put("Outputln", CategTokens.PR_OUTPUTLN);
+        reservedWord.put("True", CategTokens.PR_TRUE);
+        reservedWord.put("False", CategTokens.PR_FALSE);
     }
 
 }
