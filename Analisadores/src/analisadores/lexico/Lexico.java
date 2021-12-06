@@ -37,12 +37,11 @@ public class Lexico {
         {
             txtLine = contTemp;
             System.out.printf("%4d %s %n", line, txtLine);
-
             txtLine += " ";
-            line++;
 
-            pos = 0;
+            line++;
             column = 0;
+            pos = 0;
 
             return true;
         }

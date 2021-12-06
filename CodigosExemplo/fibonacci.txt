@@ -1,0 +1,21 @@
+Funct Int fibonacci(Int n) Begin
+        If(n < 2) Begin
+            Return n;
+        End
+        Else Begin
+            Return fibonacci(n - 1) + fibonacci(n - 2);
+        End
+End
+
+Funct Int Main() Begin
+        Int n;
+        Output('Digite o limite: ');
+        Input(n);
+
+        For(Int i = 0, 1, n) Begin
+		    total = fibonacci(i);
+            Imprimir(total);
+	    End
+
+        Return;
+End
