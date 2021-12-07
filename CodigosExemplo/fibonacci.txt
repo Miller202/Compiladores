@@ -14,7 +14,7 @@ Funct Int Main() Begin
 
         For(Int i = 0, 1, n) Begin
 		    total = fibonacci(i);
-            Imprimir(total);
+            Output(total);
 	    End
 
         Return;

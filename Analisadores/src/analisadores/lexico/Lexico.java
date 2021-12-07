@@ -68,12 +68,17 @@ public class Lexico {
                 }
             }
 
-            character = cont[pos++]; // próximo char
+            character = cont[pos++]; // next char
 
             switch(state){
                 case 0:
                     if(isWhitespc(character)){
                         state = 0;
+                    }
+                    else if(character == '#') {
+                        if(isWhitespc(character)) {
+                            state = 0;
+                        }
                     }
                     else if(Character.isDigit(character)){
                         lexico += character;
@@ -87,23 +92,22 @@ public class Lexico {
                         lexico += character;
                         state = 7;
                     }
-                    else if(character == ';') {
+                    else if(character == '\''){
                         lexico += character;
-                        column++;
-                        return new Token(CategTokens.TERMINAL, lexico, line, column);
+                        state = 9;
                     }
-                    else if(character == '(') {
+                    else if(isOperation(character)){
                         lexico += character;
-                        column++;
-                        return new Token(CategTokens.AB_PAR, lexico, line, column);
+                        state = 12;
                     }
-                    else if(character == ')') {
+                    else if(isSymbolToken(character)){
                         lexico += character;
+                        CategTokens category = symbolTokens(character);
                         column++;
-                        return new Token(CategTokens.FEC_PAR, lexico, line, column);
+                        return new Token(category, lexico, line, column);
                     }
                     else {
-                        return new Token(CategTokens.ERR_SYM, lexico, line, column);
+                        new Token(CategTokens.ERR_SYM, lexico, line, column);
                     }
                     break;
                 case 1:
@@ -178,12 +182,161 @@ public class Lexico {
                     pos--;
                     if(hashTable.reservedWord.get(lexico) == null) {
                         column++;
-                        return new Token(CategTokens.ERR_PR, lexico, line, column);
+                        new Token(CategTokens.ERR_PR, lexico, line, column);
                     }else {
                         column++;
                         return new Token(hashTable.reservedWord.get(lexico), lexico, line, column);
                     }
+                case 9:
+                    if((character < (char)127) && (character > (char)31)) {
+
+                        lexico += character;
+                        character = cont[pos++]; // next char
+
+                        if(character == '\'') {
+                            lexico += character;
+                            state = 10;
+                        }else {
+                            pos--;
+                            state = 11;
+                        }
+
+                    }else {
+                        column++;
+                        new Token(CategTokens.ERR_CHAR, lexico, line, column);
+                    }
+                    break;
+                case 10:
+                    pos--;
+                    column++;
+                    return new Token(CategTokens.CT_CHAR, lexico, line, column);
+                case 11:
+                    if((character < (char)127) && (character > (char)31)) {
+
+                        lexico += character;
+
+                        if(character == '\'') {
+                            column++;
+                            return new Token(CategTokens.CT_STR, lexico, line, column);
+                        }
+
+                    }else {
+                        column++;
+                        new Token(CategTokens.ERR_CHAR, lexico, line, column);
+                    }
+                    break;
+                case 12:
+                    pos -= 2;
+                    character = cont[pos++];
+
+                    if(character == '=') {
+
+                        character = cont[pos++];
+
+                        if(character != '=') {
+                            pos--;
+                            column++;
+                            return new Token(CategTokens.OP_ATR, lexico, line, column);
+                        }else {
+                            lexico += character;
+                            column++;
+                            return new Token(CategTokens.OP_RELEQUAL, lexico, line, column);
+                        }
+
+                    }
+                    else if(character == '!') {
+
+                        character = cont[pos++];
+
+                        if(character != '=') {
+                            pos--;
+                            column++;
+                            return new Token(CategTokens.OP_NOT, lexico, line, column);
+                        }else {
+                            lexico += character;
+                            column++;
+                            return new Token(CategTokens.OP_RELDIF, lexico, line, column);
+                        }
+
+                    }
+                    else if(character == '>') {
+
+                        character = cont[pos++];
+
+                        if(character != '=') {
+                            pos--;
+                            column++;
+                            return new Token(CategTokens.OP_GREATER, lexico, line, column);
+                        }else {
+                            lexico += character;
+                            column++;
+                            return new Token(CategTokens.OP_GREATERT, lexico, line, column);
+                        }
+
+                    }
+                    else if(character == '<') {
+
+                        character = cont[pos++];
+                        if(character != '=') {
+                            pos--;
+                            column++;
+                            return new Token(CategTokens.OP_LESS, lexico, line, column);
+                        }else {
+                            lexico += character;
+                            column++;
+                            return new Token(CategTokens.OP_LESST, lexico, line, column);
+                        }
+
+                    } else {
+                        column++;
+                        new Token(CategTokens.ERR_SYM, lexico, line, column);
+                    }
             }
+        }
+    }
+
+    public CategTokens symbolTokens(char character){
+        if(character == ';') {
+            return CategTokens.TERMINAL;
+        }
+        else if(character == ',') {
+            return CategTokens.SEP;
+        }
+        else if(character == '(') {
+            return CategTokens.AB_PAR;
+        }
+        else if(character == ')') {
+            return CategTokens.FEC_PAR;
+        }
+        else if(character == '[') {
+            return CategTokens.AB_COL;
+        }
+        else if(character == ']') {
+            return CategTokens.FEC_COL;
+        }
+        else if(character == '+') {
+            return CategTokens.OP_AD;
+        }
+        else if(character == '-') {
+            return CategTokens.OP_SUB;
+        }
+        else if(character == '*') {
+            return CategTokens.OP_MULT;
+        }
+        else if(character == '/') {
+            return CategTokens.OP_DIV;
+        }
+        else if(character == '%') {
+            return CategTokens.OP_RES;
+        }
+        else if(character == '~') {
+            return CategTokens.OP_NOTUNI;
+        }
+        else if(character == '&') {
+            return CategTokens.OP_CONCAT;
+        }
+        else {
+            return CategTokens.ERR_SYM;
         }
     }
 
@@ -194,6 +347,12 @@ public class Lexico {
 
     private boolean isOperation(char character) {
         return  character == '=' || character == '!' || character == '>' || character == '<';
+    }
+
+    private boolean isSymbolToken(char character){
+        return character == ';' || character == ',' || character == '(' || character == ')' || character == '['
+        || character == ']' || character == '+' || character == '-' || character == '*' || character == '/' ||
+                character == '%' || character == '~' || character == '&';
     }
 
 }

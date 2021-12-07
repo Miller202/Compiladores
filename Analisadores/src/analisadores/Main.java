@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Main {
 
     public static void main(String[] args) {
-	    Lexico lexico = new Lexico("C:/Users/mulle/OneDrive/Documentos/GitHub/Compiladores/CodigosExemplo/hello_world.txt");
+	    Lexico lexico = new Lexico("C:/Users/mulle/OneDrive/Documentos/GitHub/Compiladores/CodigosExemplo/shell_sort.txt");
         //System.out.println(lexico.getBufReader());
         Token token;
         try {

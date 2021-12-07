@@ -11,7 +11,7 @@ Funct Void shellsort(Int array[ ], Int n) Begin
 		For (Int i = h, 1, n) Begin
                     c = array[i];
                     j = i;
-                    While(j >= h E array[j - h] > c) Begin
+                    While(j >= h And array[j - h] > c) Begin
                             array[j] = array[j - h];
                             j = j - h;
                     End
