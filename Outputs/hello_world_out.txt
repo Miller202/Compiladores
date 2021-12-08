@@ -1,0 +1,16 @@
+   1 Funct Int Main() Begin
+ [0001,0001] (0004,         PR_FUNCTION) {Funct}
+ [0001,0002] (0015,              PR_INT) {Int}
+ [0001,0003] (0005,             PR_MAIN) {Main}
+ [0001,0004] (0048,              AB_PAR) {(}
+ [0001,0005] (0049,             FEC_PAR) {)}
+ [0001,0006] (0002,            PR_BEGIN) {Begin}
+   2       Output('Hello World');
+ [0002,0001] (0021,           PR_OUTPUT) {Output}
+ [0002,0002] (0048,              AB_PAR) {(}
+ [0002,0003] (0029,              CT_STR) {'Hello World'}
+ [0002,0004] (0049,             FEC_PAR) {)}
+ [0002,0005] (0052,            TERMINAL) {;}
+   3 End
+ [0003,0001] (0003,              PR_END) {End}
+ [0003,0001] (0000,                 EOF) {EOF}
