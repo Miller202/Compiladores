@@ -10,15 +10,15 @@ Funct Int fibonacci(Int n) Begin
         Else Begin
             Output('0, 1, ');
             While(True) Begin
-                    n3 = n1 + n2;
+                    v3 = v1 + v2;
 
-                    if(n < n3) Begin
+                    if(n < v3) Begin
                             Return;
                     End
                     
-                    Output(', ', n3);
-                    n1 = n2;
-                    n2 = n3;
+                    Output(', ', v3);
+                    v1 = v2;
+                    v2 = v3;
             End
         End
 End

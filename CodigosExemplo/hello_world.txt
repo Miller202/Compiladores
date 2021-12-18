@@ -1,3 +1,4 @@
 Funct Int Main() Begin
       Output('Hello World');
+      Return 0;
 End

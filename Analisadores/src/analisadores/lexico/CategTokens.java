@@ -4,6 +4,7 @@ public enum CategTokens {
 
     EOF,
     ID,
+
     PR_BEGIN,
     PR_END,
     PR_FUNCTION,
@@ -27,11 +28,12 @@ public enum CategTokens {
     PR_OUTPUTLN,
     PR_TRUE,
     PR_FALSE,
-    BOOL_VALUE,
+
     CT_FLOAT,
     CT_INT,
     CT_CHAR,
     CT_STR,
+
     OP_ATR,
     OP_REL,
     OP_RELEQUAL,
@@ -48,6 +50,7 @@ public enum CategTokens {
     OP_NOT,
     OP_NOTUNI,
     OP_CONCAT,
+
     AB_BEGIN,
     FEC_END,
     AB_PAR,
@@ -56,6 +59,7 @@ public enum CategTokens {
     FEC_COL,
     TERMINAL,
     SEP,
+
     ERR_ID,
     ERR_CHAR,
     ERR_NUM,
