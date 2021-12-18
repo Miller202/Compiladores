@@ -1,5 +1,6 @@
 package analisadores;
 
+import analisadores.lexico.CategTokens;
 import analisadores.lexico.Lexico;
 import analisadores.lexico.Token;
 
@@ -17,7 +18,7 @@ public class Main {
                 if(token != null) {
                     System.out.println(token);
                 }
-            }while(!Objects.requireNonNull(token).lexeme.equals("EOF"));
+            }while(!Objects.requireNonNull(token).category.equals(CategTokens.EOF));
         }catch(Exception ex) {
             System.out.println("common error");
         }

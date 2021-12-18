@@ -37,7 +37,7 @@ Funct Int Main ( ) Begin
             v = array[i];
 	    Outputln(v);
         End
-	shellsort(array[n], n);
+	shellsort(array, n);
 
 	Output('Valores ordenados: ');
         For (Int i = 0, 1, n) Begin

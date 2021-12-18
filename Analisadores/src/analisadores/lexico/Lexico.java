@@ -14,7 +14,7 @@ public class Lexico {
     public Lexico(String file){
         try{
             line = 1;
-            column = 1;
+            column = 0;
             pos = 0;
             bufReader = new BufferedReader(new FileReader(file));
             readNextLine();
@@ -73,10 +73,12 @@ public class Lexico {
             switch(state){
                 case 0:
                     if(isWhitespc(character)){
+                        column=pos;
                         state = 0;
                     }
                     else if(character == '#') {
                         if(isWhitespc(character)) {
+                            column=pos;
                             state = 0;
                         }
                     }
@@ -184,7 +186,6 @@ public class Lexico {
                         column++;
                         new Token(CategTokens.ERR_PR, lexico, line, column);
                     }else {
-                        column++;
                         return new Token(hashTable.reservedWord.get(lexico), lexico, line, column);
                     }
                 case 9:
