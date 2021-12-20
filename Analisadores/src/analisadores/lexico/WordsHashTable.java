@@ -16,6 +16,7 @@ public class WordsHashTable {
         reservedWord.put("Return", CategTokens.PR_RETURN);
         reservedWord.put("And", CategTokens.PR_AND);
         reservedWord.put("Or", CategTokens.PR_OR);
+        reservedWord.put("Not", CategTokens.PR_NOT);
         reservedWord.put("If", CategTokens.PR_IF);
         reservedWord.put("Else", CategTokens.PR_ELSE);
         reservedWord.put("While", CategTokens.PR_WHILE);

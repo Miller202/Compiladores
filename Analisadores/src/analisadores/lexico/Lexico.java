@@ -250,9 +250,7 @@ public class Lexico {
                         character = cont[pos++];
 
                         if(character != '=') {
-                            pos--;
-                            column++;
-                            return new Token(CategTokens.OP_NOT, lexico, line, column);
+                            return new Token(CategTokens.ERR_SYM, lexico, line, column);
                         }else {
                             lexico += character;
                             column++;

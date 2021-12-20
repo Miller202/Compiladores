@@ -15,6 +15,7 @@ public enum CategTokens {
     PR_RETURN,
     PR_AND,
     PR_OR,
+    PR_NOT,
     PR_IF,
     PR_ELSE,
     PR_WHILE,
@@ -49,7 +50,6 @@ public enum CategTokens {
     OP_LESS,
     OP_GREATERT,
     OP_LESST,
-    OP_NOT,
     OP_NOTUNI,
     OP_CONCAT,
 
