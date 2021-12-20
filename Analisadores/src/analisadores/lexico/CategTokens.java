@@ -5,6 +5,7 @@ public enum CategTokens {
     EOF,
     ID,
 
+    // palavras reservadas
     PR_BEGIN,
     PR_END,
     PR_FUNCTION,
@@ -29,13 +30,14 @@ public enum CategTokens {
     PR_TRUE,
     PR_FALSE,
 
+    // constantes
     CT_FLOAT,
     CT_INT,
     CT_CHAR,
     CT_STR,
 
+    // operações
     OP_ATR,
-    OP_REL,
     OP_RELEQUAL,
     OP_RELDIF,
     OP_AD,
@@ -51,8 +53,7 @@ public enum CategTokens {
     OP_NOTUNI,
     OP_CONCAT,
 
-    AB_BEGIN,
-    FEC_END,
+    // delimitadores
     AB_PAR,
     FEC_PAR,
     AB_COL,
@@ -60,6 +61,7 @@ public enum CategTokens {
     TERMINAL,
     SEP,
 
+    // erros
     ERR_ID,
     ERR_CHAR,
     ERR_NUM,
