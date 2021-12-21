@@ -73,12 +73,12 @@ public class Lexico {
             switch(state){
                 case 0:
                     if(isWhitespc(character)){
-                        column=pos;
+                        columnUpdate();
                         state = 0;
                     }
                     else if(character == '#') {
                         if(isWhitespc(character)) {
-                            column=pos;
+                            columnUpdate();
                             state = 0;
                         }
                     }
@@ -98,14 +98,18 @@ public class Lexico {
                         lexico += character;
                         state = 9;
                     }
+                    else if(character == '\"'){
+                        lexico += character;
+                        state = 11;
+                    }
                     else if(isOperation(character)){
                         lexico += character;
-                        state = 12;
+                        state = 13;
                     }
                     else if(isSymbolToken(character)){
                         lexico += character;
                         CategTokens category = symbolTokens(character);
-                        column++;
+                        
                         return new Token(category, lexico, line, column);
                     }
                     else {
@@ -116,7 +120,6 @@ public class Lexico {
                     if(character == '.') {
                         lexico += character;
                         state = 2;
-                        column++;
                     }
                     else if(Character.isDigit(character)) {
                         lexico += character;
@@ -127,7 +130,6 @@ public class Lexico {
                         state = 3;
                     }
                     else {
-                        column++;
                         new Token(CategTokens.ERR_NUM, lexico, line, column);
                     }
                     break;
@@ -141,17 +143,14 @@ public class Lexico {
                         state = 4;
                     }
                     else {
-                        column++;
                         new Token(CategTokens.ERR_NUM, lexico, line, column);
                     }
                     break;
                 case 3:
                     pos--;
-                    column++;
                     return new Token(CategTokens.CT_INT, lexico, line, column);
                 case 4:
                     pos--;
-                    column++;
                     return new Token(CategTokens.CT_FLOAT, lexico, line, column);
                 case 5:
                     if(Character.isDigit(character) || Character.isLowerCase(character)
@@ -164,13 +163,11 @@ public class Lexico {
                         state = 6;
                     }
                     else {
-                        column++;
                         new Token(CategTokens.ERR_ID, lexico, line, column);
                     }
                     break;
                 case 6:
                     pos--;
-                    column++;
                     return new Token(CategTokens.ID, lexico, line, column);
                 case 7:
                     if(Character.isLowerCase(character)) {
@@ -183,7 +180,6 @@ public class Lexico {
                 case 8:
                     pos--;
                     if(hashTable.reservedWord.get(lexico) == null) {
-                        column++;
                         new Token(CategTokens.ERR_PR, lexico, line, column);
                     }else {
                         return new Token(hashTable.reservedWord.get(lexico), lexico, line, column);
@@ -198,35 +194,33 @@ public class Lexico {
                             lexico += character;
                             state = 10;
                         }else {
-                            pos--;
-                            state = 11;
+                            return new Token(CategTokens.ERR_CHAR, lexico, line, column);
                         }
 
                     }else {
-                        column++;
                         new Token(CategTokens.ERR_CHAR, lexico, line, column);
                     }
                     break;
                 case 10:
                     pos--;
-                    column++;
                     return new Token(CategTokens.CT_CHAR, lexico, line, column);
                 case 11:
                     if((character < (char)127) && (character > (char)31)) {
 
                         lexico += character;
 
-                        if(character == '\'') {
-                            column++;
-                            return new Token(CategTokens.CT_STR, lexico, line, column);
+                        if(character == '\"') {
+                            state = 12;
                         }
 
                     }else {
-                        column++;
                         new Token(CategTokens.ERR_CHAR, lexico, line, column);
                     }
                     break;
                 case 12:
+                    pos--;
+                    return new Token(CategTokens.CT_STR, lexico, line, column);
+                case 13:
                     pos -= 2;
                     character = cont[pos++];
 
@@ -236,11 +230,9 @@ public class Lexico {
 
                         if(character != '=') {
                             pos--;
-                            column++;
                             return new Token(CategTokens.OP_ATR, lexico, line, column);
                         }else {
                             lexico += character;
-                            column++;
                             return new Token(CategTokens.OP_RELEQUAL, lexico, line, column);
                         }
 
@@ -254,7 +246,6 @@ public class Lexico {
                             return new Token(CategTokens.ERR_SYM, lexico, line, column);
                         }else {
                             lexico += character;
-                            column++;
                             return new Token(CategTokens.OP_RELDIF, lexico, line, column);
                         }
 
@@ -265,11 +256,9 @@ public class Lexico {
 
                         if(character != '=') {
                             pos--;
-                            column++;
                             return new Token(CategTokens.OP_GREATER, lexico, line, column);
                         }else {
                             lexico += character;
-                            column++;
                             return new Token(CategTokens.OP_GREATERT, lexico, line, column);
                         }
 
@@ -279,16 +268,13 @@ public class Lexico {
                         character = cont[pos++];
                         if(character != '=') {
                             pos--;
-                            column++;
                             return new Token(CategTokens.OP_LESS, lexico, line, column);
                         }else {
                             lexico += character;
-                            column++;
                             return new Token(CategTokens.OP_LESST, lexico, line, column);
                         }
 
                     } else {
-                        column++;
                         new Token(CategTokens.ERR_SYM, lexico, line, column);
                     }
             }
@@ -338,6 +324,10 @@ public class Lexico {
         else {
             return CategTokens.ERR_SYM;
         }
+    }
+
+    public void columnUpdate(){
+        this.column = this.pos;
     }
 
     private boolean isWhitespc(char character) {

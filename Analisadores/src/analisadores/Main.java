@@ -14,6 +14,7 @@ public class Main {
         Token token;
         try {
             do {
+                lexico.columnUpdate();
                 token = lexico.nextToken();
                 if(token != null) {
                     System.out.println(token);

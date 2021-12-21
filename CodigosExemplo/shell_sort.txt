@@ -24,15 +24,15 @@ End
 
 Funct Int Main ( ) Begin
 	Int n, v;
-	Output('Digite o tamanho do array: ');
+	Output("Digite o tamanho do array: ");
 	Input(n);
 	Int array[n];
 
-	Output('Digite os valores para serem ordenados: ');
+	Output("Digite os valores para serem ordenados: ");
         For (Int i = 0, 1, n) Begin
 	        Input(array[i]);
         End
-        Output('Valores adicionados: ');
+        Output("Valores adicionados: ");
         For (Int i = 0, 1, n) Begin
             v = array[i];
 	    Outputln(v);
@@ -40,7 +40,7 @@ Funct Int Main ( ) Begin
 		
 	shellsort(array, n);
 
-	Output('Valores ordenados: ');
+	Output("Valores ordenados: ");
         For (Int i = 0, 1, n) Begin
             v = array[i];
 	    Outputln(v);
