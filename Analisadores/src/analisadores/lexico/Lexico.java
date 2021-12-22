@@ -72,12 +72,12 @@ public class Lexico {
 
             switch(state){
                 case 0:
-                    if(isWhitespc(character)){
+                    if(isWhiteSpc(character)){
                         columnUpdate();
                         state = 0;
                     }
                     else if(character == '#') {
-                        if(isWhitespc(character)) {
+                        if(isWhiteSpc(character)) {
                             columnUpdate();
                             state = 0;
                         }
@@ -109,7 +109,6 @@ public class Lexico {
                     else if(isSymbolToken(character)){
                         lexico += character;
                         CategTokens category = symbolTokens(character);
-                        
                         return new Token(category, lexico, line, column);
                     }
                     else {
@@ -124,7 +123,7 @@ public class Lexico {
                     else if(Character.isDigit(character)) {
                         lexico += character;
                     }
-                    else if(!Character.isLetterOrDigit(character) || isWhitespc(character)
+                    else if(!Character.isLetterOrDigit(character) || isWhiteSpc(character)
                             || isOperation(character)) {
                         pos--;
                         state = 3;
@@ -137,7 +136,7 @@ public class Lexico {
                     if(Character.isDigit(character)) {
                         lexico += character;
                     }
-                    else if(!Character.isLetterOrDigit(character) || isWhitespc(character)
+                    else if(!Character.isLetterOrDigit(character) || isWhiteSpc(character)
                             || isOperation(character)) {
                         pos--;
                         state = 4;
@@ -157,7 +156,7 @@ public class Lexico {
                             || Character.isUpperCase(character)) {
                         lexico += character;
                     }
-                    else if(!Character.isLetterOrDigit(character) || isWhitespc(character)
+                    else if(!Character.isLetterOrDigit(character) || isWhiteSpc(character)
                             || isOperation(character)) {
                         pos--;
                         state = 6;
@@ -172,7 +171,7 @@ public class Lexico {
                 case 7:
                     if(Character.isLowerCase(character)) {
                         lexico += character;
-                    } else if(!Character.isLowerCase(character) || isWhitespc(character)) {
+                    } else if(!Character.isLowerCase(character) || isWhiteSpc(character)) {
                         pos--;
                         state = 8;
                     }
@@ -321,6 +320,9 @@ public class Lexico {
         else if(character == '&') {
             return CategTokens.OP_CONCAT;
         }
+        else if(character == '@'){
+            return CategTokens.OP_SIZE;
+        }
         else {
             return CategTokens.ERR_SYM;
         }
@@ -330,7 +332,7 @@ public class Lexico {
         this.column = this.pos;
     }
 
-    private boolean isWhitespc(char character) {
+    private boolean isWhiteSpc(char character) {
         return Character.isWhitespace(character) || character == '\n' || character == '\f'
                 || character == '\b' || character == '\0' || character == '\r' || character == '\t';
     }

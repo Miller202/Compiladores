@@ -52,6 +52,7 @@ public enum CategTokens {
     OP_LESST,
     OP_NOTUNI,
     OP_CONCAT,
+    OP_SIZE,
 
     // delimitadores
     AB_PAR,

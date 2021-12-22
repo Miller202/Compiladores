@@ -1,0 +1,7 @@
+Funct Int Main ( ) Begin
+
+      Int vector[5] = [14, 7, 3, 9, 10];
+
+      Int size = @ vector;
+
+End
