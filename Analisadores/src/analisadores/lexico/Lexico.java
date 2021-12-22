@@ -344,7 +344,7 @@ public class Lexico {
     private boolean isSymbolToken(char character){
         return character == ';' || character == ',' || character == '(' || character == ')' || character == '['
         || character == ']' || character == '+' || character == '-' || character == '*' || character == '/' ||
-                character == '%' || character == '~' || character == '&';
+                character == '%' || character == '~' || character == '&' || character == '@';
     }
 
 }
