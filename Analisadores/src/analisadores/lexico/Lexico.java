@@ -37,7 +37,7 @@ public class Lexico {
         if(contTemp != null)
         {
             txtLine = contTemp;
-            System.out.printf("%4d %s %n", line, txtLine);
+            System.out.printf("%4d %s  %n", line, txtLine);
             txtLine += " ";
 
             line++;
@@ -329,7 +329,7 @@ public class Lexico {
     }
 
     public void columnUpdate(){
-        this.column = this.pos;
+        this.column = this.pos+1;
     }
 
     private boolean isWhiteSpc(char character) {
