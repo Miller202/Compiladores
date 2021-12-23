@@ -63,7 +63,7 @@ public class Lexico {
         while(true){
             if(pos == cont.length){
                 if(!readNextLine()){
-                    return new Token(CategTokens.EOF, "EOF", line, column);
+                    return new Token(CategTokens.EOF, "EOF", line, column - 1);
                 }else{
                     cont = txtLine.toCharArray();
                 }
