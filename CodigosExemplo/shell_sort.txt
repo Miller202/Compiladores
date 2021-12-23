@@ -3,13 +3,13 @@ Funct Void shellsort(Int array[ ]) Begin
     Int n = @ array;
 
     While (h < n) Begin
-		h = h * 3 + 1;
-	End
+        h = h * 3 + 1;
+    End
 
-	h = h / 3;
+    h = h / 3;
 
-	While(h > 0) Begin
-		For (Int i = h, n) Begin
+    While(h > 0) Begin
+        For (Int i = h, n) Begin
             c = array[i];
             j = i;
             While(j >= h And array[j - h] > c) Begin
@@ -17,19 +17,19 @@ Funct Void shellsort(Int array[ ]) Begin
                 j = j - h;
             End
             array[j] = c;
-		End
-		h = h / 2;
-	End
-	Return;
+        End
+        h = h / 2;
+    End
+    Return;
 End
 
 Funct Int Main ( ) Begin
     Int n, v, i;
-	Output("Digite o tamanho do array: ");
-	Input(n);
-	Int array[n];
+    Output("Digite o tamanho do array: ");
+    Input(n);
+    Int array[n];
 
-	Output("Digite os valores para serem ordenados: ");
+    Output("Digite os valores para serem ordenados: ");
     For (i = 0, n) Begin
         Input(array[i]);
     End
@@ -37,17 +37,16 @@ Funct Int Main ( ) Begin
     Output("Valores adicionados: ");
     For (i = 0, n) Begin
         v = array[i];
-    	Output(v, " ");
+        Output(v, " ");
     End
-		
-	shellsort(array);
+        
+    shellsort(array);
 
-	Output("Valores ordenados: ");
+    Output("Valores ordenados: ");
     For (i = 0, n) Begin
         v = array[i];
-    	Output(v, " ");
+        Output(v, " ");
     End
 
-	Return;
+    Return;
 End
-
