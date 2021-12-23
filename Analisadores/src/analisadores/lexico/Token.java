@@ -10,7 +10,7 @@ public class Token {
         this.category = category;
         this.lexeme = lexeme;
         this.line = line;
-        this.column = column;
+        this.column = column + 1;
     }
 
     @Override

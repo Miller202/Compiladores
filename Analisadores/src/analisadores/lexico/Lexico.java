@@ -330,7 +330,7 @@ public class Lexico {
     }
 
     public void columnUpdate(){
-        this.column = this.pos+1;
+        this.column = this.pos;
     }
 
     private boolean isWhiteSpc(char character) {
