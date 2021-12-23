@@ -1,5 +1,6 @@
-Funct Void shellsort(Int array[ ], Int n) Begin
-	Int h = 1, c, j;
+Funct Void shellsort(Int array[ ]) Begin
+    Int h = 1, c, j;
+    Int n = @ array;
 
     While (h < n) Begin
 		h = h * 3 + 1;
@@ -32,14 +33,14 @@ Funct Int Main ( ) Begin
     For (i = 0, n) Begin
         Input(array[i]);
     End
-    
+
     Output("Valores adicionados: ");
     For (i = 0, n) Begin
         v = array[i];
     	Output(v, " ");
     End
 		
-	shellsort(array, n);
+	shellsort(array);
 
 	Output("Valores ordenados: ");
     For (i = 0, n) Begin
