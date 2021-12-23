@@ -37,7 +37,8 @@ public class Lexico {
         if(contTemp != null)
         {
             txtLine = contTemp;
-            System.out.printf("%4d %s  %n", line, txtLine);
+            String sep = " ";
+            System.out.printf("%4d %s%s%n", line, sep, txtLine);
             txtLine += " ";
 
             line++;
