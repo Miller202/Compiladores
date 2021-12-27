@@ -4,4 +4,12 @@ Funct Int Main ( ) Begin
 
       Int size = @ vector;
 
+      Char carac = '\0';
+
+      Char carac2 = 'j';
+
+      Char carac3 = '\';
+
+      Return;
+
 End

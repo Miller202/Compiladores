@@ -187,13 +187,18 @@ public class Lexico {
                 case 9:
                     if((character < (char)127) && (character > (char)31)) {
 
+                        char aux = character;
                         lexico += character;
                         character = cont[pos++]; // next char
 
+                        if(aux == '\\' && character == '0'){
+                            lexico += character;
+                            character = cont[pos++];
+                        }
                         if(character == '\'') {
                             lexico += character;
                             state = 10;
-                        }else {
+                        } else {
                             return new Token(CategTokens.ERR_CHAR, lexico, line, column);
                         }
 
