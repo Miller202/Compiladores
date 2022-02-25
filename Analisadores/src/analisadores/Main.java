@@ -5,14 +5,11 @@ import analisadores.lexico.Lexico;
 import analisadores.lexico.Token;
 import analisadores.sintatico.Sintatico;
 
-import java.util.Objects;
-
 public class Main {
 
     public static void main(String[] args) {
 	    //Lexico lexico = new Lexico(args[0]);
         //System.out.println(lexico.getBufReader());
-        Token token = null;
         try {
 //            do {
 //                lexico.columnUpdate();
