@@ -19,7 +19,6 @@ public class Sintatico {
         lexico.columnUpdate();
         token = lexico.nextToken();
         if(token.category == CategTokens.EOF) {
-            System.out.println(token);
             return;
         }
     }
@@ -68,6 +67,7 @@ public class Sintatico {
         else {
             printProduction("S", epsilon);
             System.out.println(token);
+            setNextToken();
         }
     }
 
@@ -106,7 +106,8 @@ public class Sintatico {
 
     private void fFunType() {
         if(checkCategory(CategTokens.PR_VOID)) {
-            printProduction("FunType", "‘Void’");
+            printProduction("FunType", "'Void'");
+            System.out.println(token);
             setNextToken();
         }
         else if(isTypeCategory()) {
@@ -117,40 +118,36 @@ public class Sintatico {
 
     private void fVarType() {
         if(checkCategory(CategTokens.PR_INT)) {
-            printProduction("VarType", "‘Int’");
-            setNextToken();
+            printProduction("VarType", "'Int'");
         }
         else if(checkCategory(CategTokens.PR_FLOAT)) {
-            printProduction("VarType", "‘Float’");
-            setNextToken();
+            printProduction("VarType", "'Float'");
         }
         else if(checkCategory(CategTokens.PR_CHAR)) {
-            printProduction("VarType", "‘Char’");
-            setNextToken();
+            printProduction("VarType", "'Char'");
         }
         else if(checkCategory(CategTokens.PR_STR)) {
-            printProduction("VarType", "‘Str’");
-            setNextToken();
+            printProduction("VarType", "'Str'");
         }
         else if(checkCategory(CategTokens.PR_BOOL)) {
-            printProduction("VarType", "‘Bool’");
-            setNextToken();
+            printProduction("VarType", "'Bool'");
         }
+        System.out.println(token);
+        setNextToken();
     }
 
+    private void fParam() {
 
+    }
 
-
-
+    private void fParamDc(){
             fVet();
-
             fParamDcFat();
-        }
     }
 
     private void fParamDcFat() {
         if (checkCategory(CategTokens.SEP)) {
-            printProduction("ParamDcFat", "‘,’ ParamDc");
+            printProduction("ParamDcFat", "',' ParamDc");
             setNextToken();
 
             fParamDc();
@@ -162,7 +159,7 @@ public class Sintatico {
 
     private void fBlockDc() {
         if (checkCategory(CategTokens.PR_BEGIN)) {
-            printProduction("BlockDc", "‘Begin’ Instructions ‘End’");
+            printProduction("BlockDc", "'Begin' Instructions 'End'");
             setNextToken();
 
             fInstructions();
@@ -175,7 +172,7 @@ public class Sintatico {
 
     private void fVet() {
         if (checkCategory(CategTokens.AB_PAR)) {
-            printProduction("Vet", "‘[’ ‘]’");
+            printProduction("Vet", "'[' ']'");
             setNextToken();
 
             if(checkCategory(CategTokens.FEC_PAR)) {
@@ -213,6 +210,15 @@ public class Sintatico {
             fInstructions();
         }
         
+    }
+
+    private void fCommand() {
+    }
+
+    private void fCommandIO() {
+    }
+
+    private void fFunCall() {
     }
 
 }
