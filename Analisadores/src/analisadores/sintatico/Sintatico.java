@@ -105,15 +105,114 @@ public class Sintatico {
     }
 
     private void fFunType() {
-
+        if(checkCategory(CategTokens.PR_VOID)) {
+            printProduction("FunType", "‘Void’");
+            setNextToken();
+        }
+        else if(isTypeCategory()) {
+            printProduction("FunType", "VarType");
+            fVarType();
+        }
     }
 
-    private void fParam() {
+    private void fVarType() {
+        if(checkCategory(CategTokens.PR_INT)) {
+            printProduction("VarType", "‘Int’");
+            setNextToken();
+        }
+        else if(checkCategory(CategTokens.PR_FLOAT)) {
+            printProduction("VarType", "‘Float’");
+            setNextToken();
+        }
+        else if(checkCategory(CategTokens.PR_CHAR)) {
+            printProduction("VarType", "‘Char’");
+            setNextToken();
+        }
+        else if(checkCategory(CategTokens.PR_STR)) {
+            printProduction("VarType", "‘Str’");
+            setNextToken();
+        }
+        else if(checkCategory(CategTokens.PR_BOOL)) {
+            printProduction("VarType", "‘Bool’");
+            setNextToken();
+        }
+    }
 
+
+
+
+
+            fVet();
+
+            fParamDcFat();
+        }
+    }
+
+    private void fParamDcFat() {
+        if (checkCategory(CategTokens.SEP)) {
+            printProduction("ParamDcFat", "‘,’ ParamDc");
+            setNextToken();
+
+            fParamDc();
+        }
+        else {
+            printProduction("ParamDcFat", epsilon);
+        }
     }
 
     private void fBlockDc() {
+        if (checkCategory(CategTokens.PR_BEGIN)) {
+            printProduction("BlockDc", "‘Begin’ Instructions ‘End’");
+            setNextToken();
 
+            fInstructions();
+
+            if (checkCategory(CategTokens.PR_END)) {
+                setNextToken();
+            }
+        }
+    }
+
+    private void fVet() {
+        if (checkCategory(CategTokens.AB_PAR)) {
+            printProduction("Vet", "‘[’ ‘]’");
+            setNextToken();
+
+            if(checkCategory(CategTokens.FEC_PAR)) {
+                setNextToken();
+            }
+        }
+        else {
+            printProduction("Vet", epsilon);
+        }
+    }
+
+    private void fInstructions() {
+        if (isTypeCategory()) {
+            printProduction("Instructions", "DcId Instructions");
+
+            fDcId();
+            fInstructions();
+        }
+        else if (checkCategory(CategTokens.PR_WHILE, CategTokens.PR_IF, CategTokens.PR_FOR)) {
+            printProduction("Instructions", "Command Instructions");
+
+            fCommand();
+            fInstructions();
+        }
+        else if(checkCategory(CategTokens.PR_INPUT, CategTokens.PR_OUTPUT, CategTokens.PR_OUTPUTLN)) {
+            printProduction("Instructions", "CommandIO Instructions");
+
+            fCommandIO();
+            fInstructions();
+        }
+        else if(checkCategory(CategTokens.ID)) {
+            printProduction("Instructions", "FunCall Instructions");
+
+            fFunCall();
+            fInstructions();
+        }
+        
     }
 
 }
