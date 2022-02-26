@@ -1,15 +1,6 @@
-Funct Int Main ( ) Begin
+Funct Void testando( Int t, Float jota  ) Begin
 
-      Int vector[5] = [14, 7, 3, 9, 10];
-
-      Int size = @ vector;
-
-      Char carac = '\0';
-
-      Char carac2 = 'j';
-
-      Char carac3 = '\';
-
-      Return;
-
+      Int java = 3;
+      Int array = [1, 2, 3, 4, 5];
+      Int tamanho = @ array;
 End
