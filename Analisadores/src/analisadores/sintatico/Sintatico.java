@@ -665,6 +665,9 @@ public class Sintatico {
             setNextToken();
 
             if(checkCategory(CategTokens.AB_PAR)) {
+                System.out.println(token);
+                setNextToken();
+
                 DcInt();
                 
                 if(checkCategory(CategTokens.SEP)) {
@@ -703,16 +706,32 @@ public class Sintatico {
     }
 
     private void DcInt(){
-        if(checkCategory(CategTokens.PR_INT, CategTokens.ID)){
-            if(checkCategory(CategTokens.PR_INT)){
-                printProduction("DcInt", "'Int' 'id'");
-            }
-            else if(checkCategory(CategTokens.ID)){
-                printProduction("DcInt", "'id'");
-            }
+        if(checkCategory(CategTokens.PR_INT)){
+            printProduction("DcInt", "'Int' 'id' '=' IntValue");
+
             System.out.println(token);
             setNextToken();
+
+            if(checkCategory(CategTokens.ID)) {
+                System.out.println(token);
+                setNextToken();
+
+                if(checkCategory(CategTokens.OP_ATR)){
+                    System.out.println(token);
+                    setNextToken();
+                    IntValue();
+                }
+            }
         }
+        else if(checkCategory(CategTokens.ID)){
+            printProduction("DcInt", "'id' AtrInt");
+
+            System.out.println(token);
+            setNextToken();
+
+            AtrInt();
+        }
+        
     }
 
     private void IntValue(){
@@ -725,6 +744,20 @@ public class Sintatico {
             }
             System.out.println(token);
             setNextToken();
+        }
+    }
+
+    private void AtrInt() {
+        if (checkCategory(CategTokens.OP_ATR)) {
+            printProduction("AtrInt", "'=' IntValue");
+
+            System.out.println(token);
+            setNextToken();
+
+            IntValue();
+        }
+        else {
+            printProduction("AtrInt", epsilon);
         }
     }
 
@@ -754,9 +787,12 @@ public class Sintatico {
 
     private void InputParam(){
         if(checkCategory(CategTokens.ID)){
-            printProduction("InputParam", "'id' InputParamFat");
+            printProduction("InputParam", "'id' Id InputParamFat");
+
             System.out.println(token);
             setNextToken();
+
+            Id();
             InputParamFat();
         }
     }

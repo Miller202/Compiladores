@@ -9,7 +9,7 @@ Funct Void shellsort(Int array[ ]) Begin
     h = h / 3;
 
     While(h > 0) Begin
-        For (Int i = h, n) Begin
+        For(Int i = h, n) Begin
             c = array[i];
             j = i;
             While(j >= h And array[j - h] > c) Begin
