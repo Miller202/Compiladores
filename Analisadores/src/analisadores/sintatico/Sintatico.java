@@ -7,7 +7,7 @@ import analisadores.lexico.Token;
 public class Sintatico {
     private Lexico lexico;
     private Token token;
-    private String epsilon = "ε";
+    private String epsilon = "Epsilon";
 
     public Sintatico(String a) {
         lexico = new Lexico(a);
@@ -55,8 +55,6 @@ public class Sintatico {
 //        }
         if(checkCategory(CategTokens.PR_FUNCTION)){
             printProduction("S", "DcFun S");
-            System.out.println(token);
-
             fDcFun();
             fS();
         }
@@ -78,8 +76,8 @@ public class Sintatico {
 
     private void fDcFun () {
         if(checkCategory(CategTokens.PR_FUNCTION)) {
-            printProduction("DcFun", " ‘Funct’ FunType ‘id’ ‘(‘ Param ‘)’ BlockDc");
-
+            printProduction("DcFun", "'Funct' FunType 'id' '(' Param ')' BlockDc");
+            System.out.println(token);
             setNextToken();
             fFunType();
 
@@ -103,12 +101,19 @@ public class Sintatico {
         }
     }
 
+    private void fDcId() {
+    }
+
     private void fFunType() {
 
     }
 
+    private void fParam() {
 
+    }
 
+    private void fBlockDc() {
 
+    }
 
 }
