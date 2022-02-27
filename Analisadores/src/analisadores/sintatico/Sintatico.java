@@ -71,6 +71,7 @@ public class Sintatico {
         }
         else {
             printProduction("S", epsilon);
+            System.out.println(token);
         }
     }
 
@@ -266,6 +267,7 @@ public class Sintatico {
             Instructions();
 
             if (checkCategory(CategTokens.PR_END)) {
+                System.out.println(token);
                 setNextToken();
             }
         }

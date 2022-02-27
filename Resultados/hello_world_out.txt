@@ -1,20 +1,61 @@
    1  Funct Int Main() Begin
+          S = 'Funct' DcFun S
               [0001, 0001] (0004,          PR_FUNCTION) {Funct}
+          DcFun = 'Int' DcIntFunMain
               [0001, 0007] (0016,               PR_INT) {Int}
+          DcIntFunMain = 'Main' '(' ')' BlockDc
               [0001, 0011] (0005,              PR_MAIN) {Main}
               [0001, 0015] (0045,               AB_PAR) {(}
               [0001, 0016] (0046,              FEC_PAR) {)}
+          BlockDc = 'Begin' Instructions 'End'
               [0001, 0018] (0002,             PR_BEGIN) {Begin}
    2      Output("Hello World");
+          Instructions = CommandIO Instructions
+          CommandIO = Output
+          Output = 'Output' '(' OutputParam ')' ';'
               [0002, 0005] (0022,            PR_OUTPUT) {Output}
               [0002, 0011] (0045,               AB_PAR) {(}
+          OutputParam = Ec OutputParamFat
               [0002, 0012] (0029,               CT_STR) {"Hello World"}
+          Ec = Eb EcLL
+          Eb = Tb EbLL
+          Tb = Ra TbLL
+          Ra = Rb RaLL
+          Rb = Ea RbLL
+          Ea = Ta EaLL
+          Ta = Fa TaLL
+          TaLL = Epsilon
+          EaLL = Epsilon
+          RbLL = Epsilon
+          RaLL = Epsilon
+          TbLL = Epsilon
+          EbLL = Epsilon
+          EcLL = Epsilon
+          OutputParamFat = Epsilon
               [0002, 0025] (0046,              FEC_PAR) {)}
               [0002, 0026] (0049,             TERMINAL) {;}
    3      Return 0;
+          Instructions = Return Instructions
+          Return = 'Return' Ec ';'
               [0003, 0005] (0008,            PR_RETURN) {Return}
+          Ec = Eb EcLL
+          Eb = Tb EbLL
+          Tb = Ra TbLL
+          Ra = Rb RaLL
+          Rb = Ea RbLL
+          Ea = Ta EaLL
+          Ta = Fa TaLL
+          Fa = 'CT_INT'
               [0003, 0012] (0027,               CT_INT) {0}
+          TaLL = Epsilon
+          EaLL = Epsilon
+          RbLL = Epsilon
+          RaLL = Epsilon
+          TbLL = Epsilon
+          EbLL = Epsilon
+          EcLL = Epsilon
               [0003, 0013] (0049,             TERMINAL) {;}
    4  End
               [0004, 0001] (0003,               PR_END) {End}
+          S = Epsilon
               [0004, 0004] (0000,                  EOF) {EOF}
