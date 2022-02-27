@@ -24,6 +24,11 @@ public class Lexico {
         }
     }
 
+    public String getPositionToken() {
+        String format = "[%04d, %04d]";
+        return String.format(format, line - 1, column + 1);
+    }
+
     private boolean readNextLine(){
 
         String contTemp = " ";

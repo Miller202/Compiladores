@@ -96,7 +96,13 @@ public class Sintatico {
                         setNextToken();
 
                         BlockDc();
+                    } 
+                    else{
+                        expectedError("')'");
                     }
+                } 
+                else{
+                    expectedError("'('");
                 }
 
             }
@@ -109,6 +115,9 @@ public class Sintatico {
 
             DcIntFunMain();
 
+        }
+        else {
+            expectedError("'Int', 'Float', 'Char', 'Str', 'Bool', 'Void'");
         }
     }
 
@@ -138,6 +147,9 @@ public class Sintatico {
             System.out.println(token);
             setNextToken();
         }
+        else {
+            expectedError("'Int', 'Float', 'Char', 'Str', 'Bool', 'Void'");
+        }
     }
 
     private void DcIntFunMain(){
@@ -156,10 +168,16 @@ public class Sintatico {
                 if (checkCategory(CategTokens.FEC_PAR)) {
                     System.out.println(token);
                     setNextToken();
-                }
 
-                BlockDc();
-            }   
+                    BlockDc();
+                }
+                else{
+                    expectedError("')'");
+                }
+            }
+            else{
+                expectedError("'('");
+            }
             
         } else if (checkCategory(CategTokens.PR_MAIN)) {
             printProduction("DcIntFunMain", "'Main' '(' ')' BlockDc");
@@ -171,15 +189,21 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
 
-                 if (checkCategory(CategTokens.FEC_PAR)) {
+                if (checkCategory(CategTokens.FEC_PAR)) {
                     System.out.println(token);
                     setNextToken();
 
                     BlockDc();
                 }
+                else{
+                    expectedError("')'");
+                }
             }
-
-           
+            else{
+                expectedError("'('");
+            }
+        } else {
+            expectedError("'Int', 'Main'");
         }
     }
 
@@ -214,6 +238,9 @@ public class Sintatico {
             System.out.println(token);
             setNextToken();
         }
+        else {
+            expectedError("'Int', 'Float', 'Char', 'Str', 'Bool'");
+        }
         
     }
 
@@ -237,6 +264,9 @@ public class Sintatico {
             if (checkCategory(CategTokens.ID)) {
                 System.out.println(token);
                 setNextToken();
+            }
+            else{
+                expectedError("'id'");
             }    
 
             Vet();
@@ -270,6 +300,12 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
             }
+            else{
+                expectedError("'End'");
+            }
+        }
+        else{
+            expectedError("'Begin'");
         }
     }
 
@@ -341,6 +377,9 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
             }
+            else{
+                expectedError("';'");
+            }
         }
     }
 
@@ -354,6 +393,9 @@ public class Sintatico {
             Id();
             Atr();
             DcIdAtrFat();
+        }
+        else{
+            expectedError("'id'");
         }
     }
 
@@ -383,6 +425,9 @@ public class Sintatico {
             if(checkCategory(CategTokens.FEC_COL)) {
                 System.out.println(token);
                 setNextToken();
+            }
+            else{
+                expectedError("']'");
             }
         }
         else {
@@ -417,10 +462,12 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
             }
+            else{
+                expectedError("']'");
+            }
 
         } else {
             printProduction("AtrFat", "Ec");
-
             Ec();
         }
     }
@@ -459,6 +506,9 @@ public class Sintatico {
             printProduction("Command", "For");
             For();
         }
+        else{
+            expectedError("'While', 'If', 'For'");
+        }
     }
 
     private void CommandIO() {
@@ -469,6 +519,9 @@ public class Sintatico {
         else if(checkCategory(CategTokens.PR_OUTPUT, CategTokens.PR_OUTPUTLN)){
             printProduction("CommandIO", "Output");
             Output();
+        }
+        else{
+            expectedError("'Input', 'Output', 'Outputln'");
         }
     }
 
@@ -482,6 +535,9 @@ public class Sintatico {
             printProduction("AtrDirFunCall", "FunCall");
 
             FunCall();
+        }
+        else{
+            expectedError("'[', '=', '('");
         }
     }
 
@@ -507,7 +563,16 @@ public class Sintatico {
                         System.out.println(token);
                         setNextToken();   
                     }
+                    else{
+                        expectedError("';'");
+                    }
                 }
+                else{
+                    expectedError("'='");
+                }
+            }
+            else{
+                expectedError("']'");
             }
 
         }
@@ -523,6 +588,12 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();   
             }
+            else{
+                expectedError("';'");
+            }
+        }
+        else{
+            expectedError("'[', '='");
         }
     }
 
@@ -543,8 +614,16 @@ public class Sintatico {
                     System.out.println(token);
                     setNextToken();
                 }
+                else{
+                    expectedError("';'");
+                }
             }
-
+            else{
+                expectedError("')'");
+            }
+        }
+        else{
+            expectedError("'('");
         }
     }
 
@@ -595,6 +674,12 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
             }
+            else{
+                expectedError("';'");
+            }
+        }
+        else{
+            expectedError("'Return'");
         }
     }
 
@@ -618,7 +703,16 @@ public class Sintatico {
                     BlockDc();
                     IfElseFat();
                 }
+                else{
+                    expectedError("')'");
+                }
             }
+            else{
+                expectedError("'('");
+            }
+        }
+        else{
+            expectedError("'If'");
         }
     }
 
@@ -655,7 +749,16 @@ public class Sintatico {
 
                     BlockDc();
                 }
+                else {
+                    expectedError("')'");
+                }
             }
+            else {
+                expectedError("'('");
+            }
+        }
+        else {
+            expectedError("'While'");
         }
     }
 
@@ -679,8 +782,18 @@ public class Sintatico {
                     IntValue();
                     ForFat();
                 }
-            }    
+                else {
+                    expectedError("','");
+                }
+            }   
+            else {
+                expectedError("'('");
+            } 
         }
+        else {
+            expectedError("'For'");
+        }
+        
     }
 
     private void ForFat(){
@@ -696,6 +809,9 @@ public class Sintatico {
 
                 BlockDc();
             }
+            else {
+                expectedError("')'");
+            }
         }
         else if(checkCategory(CategTokens.FEC_PAR)) {
             printProduction("ForFat", "')' BlockDc");
@@ -704,6 +820,9 @@ public class Sintatico {
             setNextToken();
 
             BlockDc();
+        }
+        else {
+            expectedError("',', ')'");
         }
     }
 
@@ -723,6 +842,12 @@ public class Sintatico {
                     setNextToken();
                     IntValue();
                 }
+                else {
+                    expectedError("'='");
+                }
+            }
+            else {
+                expectedError("'id'");
             }
         }
         else if(checkCategory(CategTokens.ID)){
@@ -732,6 +857,9 @@ public class Sintatico {
             setNextToken();
 
             AtrInt();
+        }
+        else {
+            expectedError("'Int', 'id'");
         }
         
     }
@@ -746,6 +874,9 @@ public class Sintatico {
             }
             System.out.println(token);
             setNextToken();
+        }
+        else {
+            expectedError("'id', 'CT_INT'");
         }
     }
 
@@ -777,13 +908,25 @@ public class Sintatico {
                 if(checkCategory(CategTokens.FEC_PAR)){
                     System.out.println(token);
                     setNextToken();
-                    if(!checkCategory(CategTokens.TERMINAL)){
-                    }else{
+                    
+                    if(checkCategory(CategTokens.TERMINAL)){
                         System.out.println(token);
                         setNextToken();
                     }
+                    else {
+                        expectedError("';'");
+                    }
+                }
+                else {
+                    expectedError("')'");
                 }
             }
+            else {
+                expectedError("'('");
+            }
+        }
+        else {
+            expectedError("'Input'");
         }
     }
 
@@ -796,6 +939,9 @@ public class Sintatico {
 
             Id();
             InputParamFat();
+        }
+        else {
+            expectedError("'id'");
         }
     }
 
@@ -819,6 +965,7 @@ public class Sintatico {
             else if(checkCategory(CategTokens.PR_OUTPUTLN)){
                 printProduction("Output", "'Outputln' '(' OutputParam ')' ';'");
             }
+            
             System.out.println(token);
             setNextToken();
     
@@ -830,14 +977,23 @@ public class Sintatico {
                 if(checkCategory(CategTokens.FEC_PAR)){
                     System.out.println(token);
                     setNextToken();
-                    if(!checkCategory(CategTokens.TERMINAL)){
-                    }
-                    else{
+                    if(checkCategory(CategTokens.TERMINAL)){
                         System.out.println(token);
                         setNextToken();
+                    } else {
+                        expectedError("';'");
                     }
                 }
+                else {
+                    expectedError("')'");
+                }
             }
+            else {
+                expectedError("'('");
+            }
+        }
+        else {
+            expectedError("'Output', 'Outputln'");
         }
     }
 
@@ -1020,11 +1176,12 @@ public class Sintatico {
             System.out.println(token);
             setNextToken();
             Ec();
-            if (!checkCategory(CategTokens.FEC_PAR)){
-            } 
-            else {
+            if (checkCategory(CategTokens.FEC_PAR)){
                 System.out.println(token);
                 setNextToken();
+            }
+            else {
+                expectedError("')'");
             }
         }
         else if(checkCategory(CategTokens.ID)){
@@ -1053,11 +1210,6 @@ public class Sintatico {
             System.out.println(token);
             setNextToken();
         }
-        else if(checkCategory(CategTokens.PR_BOOL)){
-            printProduction("Fa", "'PR_BOOL'");
-            System.out.println(token);
-            setNextToken();
-        }
         else if(checkCategory(CategTokens.CT_CHAR)){
             printProduction("Fa", "'CT_CHAR'");
             System.out.println(token);
@@ -1076,6 +1228,9 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken(); 
             }
+            else {
+                expectedError("'id'");
+            }
         }
         else if(checkCategory(CategTokens.OP_SIZE)){
             printProduction("Fa", "'OP_SIZE' 'id'");
@@ -1085,6 +1240,12 @@ public class Sintatico {
                 System.out.println(token);
                 setNextToken();
             }
+            else {
+                expectedError("'id'");
+            }
+        }
+        else {
+            printProduction("Fa", epsilon);
         }
     }
 
@@ -1094,6 +1255,9 @@ public class Sintatico {
         }
         else if(checkCategory(CategTokens.OP_RELDIF)){
             printProduction("Rel", "'OP_RELDIF'");
+        }
+        else {
+            expectedError("'OP_RELEQUAL', 'OP_RELDIF'");
         }
     }
 
@@ -1110,6 +1274,14 @@ public class Sintatico {
         else if(checkCategory(CategTokens.OP_LESST)){
             printProduction("Ops", "'OP_LESST'");
         }
+        else {
+            expectedError("'OP_GREATER', 'OP_LESS', 'OP_GREATERT', 'OP_LESST'");
+        }
+    }
+
+    public void expectedError (String expecteds) {
+        System.out.println("Error: Expected " + expecteds + " at position " + lexico.getPositionToken());
+        System.exit(1);
     }
     
 }
