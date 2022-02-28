@@ -15,7 +15,7 @@
           ParamDcFat = Epsilon
               [0001, 0027] (0046,              FEC_PAR) {)}
           BlockDc = 'Begin' Instructions 'End'
-              [0001, 0029] (0002,             PR_BEGIN) {Begin}
+              [0001, 0029] (0002,             PR_BEGIN) {Begin} 
    2      Int v1 = 0, v2 = 1, v3;
           Instructions = DcId Instructions
           DcId = VarType DcIdAtr ';'
@@ -127,6 +127,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -148,6 +149,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -210,6 +212,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -228,6 +231,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -249,6 +253,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -280,6 +285,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -352,7 +358,7 @@
           Command = IfElse
           IfElse = 'If' '(' Eb ')' BlockDc IfElseFat
               [0018, 0013] (0012,                PR_IF) {If}
-              [0018, 0015] (0045,               AB_PAR) {(}
+              [0018, 0015] (0045,               AB_PAR) {(} 
           Eb = Tb EbLL
           Tb = Ra TbLL
           Ra = Rb RaLL
@@ -371,7 +377,7 @@
           Ea = Ta EaLL
           Ta = Fa TaLL
           Fa = 'id' IdFunCall
-              [0018, 0020] (0001,                   ID) {v3}
+              [0018, 0020] (0001,                   ID) {v3} 
           IdFunCall = Id
           Id = Epsilon
           TaLL = Epsilon
@@ -394,6 +400,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -421,6 +428,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -439,6 +447,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -546,6 +555,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -570,7 +580,7 @@
               [0032, 0013] (0049,             TERMINAL) {;}
   33      fibonacci(n);
           Instructions = 'id' AtrDirFunCall Instructions
-              [0033, 0005] (0001,                   ID) {fibonacci}
+              [0033, 0005] (0001,                   ID) {fibonacci} 
           AtrDirFunCall = FunCall
           FunCall = '(' ParamFun ')' ';'
               [0033, 0014] (0045,               AB_PAR) {(}
@@ -607,6 +617,7 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
+          Fa = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
