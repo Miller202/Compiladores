@@ -1,6 +1,10 @@
 package analisadores;
 
 import analisadores.sintatico.Sintatico;
+import analisadores.lexico.CategTokens;
+import analisadores.lexico.Lexico;
+import analisadores.lexico.Token;
+import analisadores.lexico.WordsHashTable;
 
 public class Main {
 

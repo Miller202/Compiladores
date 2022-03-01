@@ -53,6 +53,11 @@ public class Sintatico {
         System.out.printf((format) + "%n", "", left, right);
     }
 
+    public void expectedError (String expecteds) {
+        System.out.println("Error: Expected " + expecteds + " at position " + lexico.getPositionToken());
+        System.exit(1);
+    }
+
     private void S(){
         if(checkCategory(CategTokens.PR_FUNCTION)){
             printProduction("S", "'Funct' DcFun S");
@@ -499,8 +504,8 @@ public class Sintatico {
             While();
         }
         else if(checkCategory(CategTokens.PR_IF)){
-            printProduction("Command", "IfElse");
-            IfElse();
+            printProduction("Command", "If");
+            If();
         }
         else if(checkCategory(CategTokens.PR_FOR)){
             printProduction("Command", "For");
@@ -599,10 +604,35 @@ public class Sintatico {
 
     private void FunCall(){
         if(checkCategory(CategTokens.AB_PAR)) {
-            printProduction("FunCall", "'(' ParamFun ')' ';'");
+            printProduction("FunCall", "'(' FunCallParam");
 
             System.out.println(token);
             setNextToken();
+
+            FunCallParam();
+        }
+        else{
+            expectedError("'('");
+        }
+    }
+
+    private void FunCallParam(){
+        if(checkCategory(CategTokens.FEC_PAR)) {
+            printProduction("FunCallParam", "')' ';'");
+
+            System.out.println(token);
+            setNextToken();
+            
+            if(checkCategory(CategTokens.TERMINAL)) {
+                System.out.println(token);
+                setNextToken();
+            }
+            else{
+                expectedError("';'");
+            }
+        }
+        else{
+            printProduction("FunCallParam", "ParamFun ')' ';'");
 
             ParamFun();
 
@@ -621,22 +651,6 @@ public class Sintatico {
             else{
                 expectedError("')'");
             }
-        }
-        else{
-            expectedError("'('");
-        }
-    }
-
-    private void IdFunCall(){
-        if(checkCategory(CategTokens.AB_PAR)) {
-            printProduction("IdFunCall", "FunCall");
-
-            FunCall();
-        }
-        else {
-            printProduction("IdFunCall", "Id");
-
-            Id();
         }
     }
 
@@ -661,13 +675,43 @@ public class Sintatico {
         }
     }
 
+    private void IdFunCall(){
+        if(checkCategory(CategTokens.AB_PAR)) {
+            printProduction("IdFunCall", "FunCall");
+
+            FunCall();
+        }
+        else {
+            printProduction("IdFunCall", "Id");
+
+            Id();
+        }
+    }
+
     private void Return(){
         if(checkCategory(CategTokens.PR_RETURN)) {
-            printProduction("Return", "'Return' Ec ';'");
+            printProduction("Return", "'Return' ReturnParam");
 
             System.out.println(token);
             setNextToken();
-            
+
+            ReturnParam();
+        }
+        else{
+            expectedError("'Return'");
+        }
+    }
+
+    private void ReturnParam(){
+        if(checkCategory(CategTokens.TERMINAL)) {
+            printProduction("ReturnParam", "';'");
+
+            System.out.println(token);
+            setNextToken();
+        }
+        else{
+            printProduction("ReturnParam", "Ec ';'");
+
             Ec();
 
             if(checkCategory(CategTokens.TERMINAL)) {
@@ -678,14 +722,11 @@ public class Sintatico {
                 expectedError("';'");
             }
         }
-        else{
-            expectedError("'Return'");
-        }
     }
 
-    private void IfElse(){
+    private void If(){
         if(checkCategory(CategTokens.PR_IF)) {
-            printProduction("IfElse", "'If' '(' Eb ')' BlockDc IfElseFat");
+            printProduction("If", "'If' '(' Eb ')' BlockDc Else");
 
             System.out.println(token);
             setNextToken();
@@ -701,7 +742,7 @@ public class Sintatico {
                     setNextToken();
 
                     BlockDc();
-                    IfElseFat();
+                    Else();
                 }
                 else{
                     expectedError("')'");
@@ -716,9 +757,9 @@ public class Sintatico {
         }
     }
 
-    private void IfElseFat(){
+    private void Else(){
         if(checkCategory(CategTokens.PR_ELSE)) {
-            printProduction("IfElseFat", "'Else' BlockDc");
+            printProduction("Else", "'Else' BlockDc");
 
             System.out.println(token);
             setNextToken();
@@ -726,7 +767,7 @@ public class Sintatico {
             BlockDc();
         }
         else {
-            printProduction("IfElseFat", epsilon);
+            printProduction("Else", epsilon);
         }
     }
 
@@ -999,8 +1040,6 @@ public class Sintatico {
 
     private void OutputParam(){
         printProduction("OutputParam", "Ec OutputParamFat");
-        System.out.println(token);
-        setNextToken();
         Ec();
         OutputParamFat();
     }
@@ -1245,7 +1284,7 @@ public class Sintatico {
             }
         }
         else {
-            printProduction("Fa", epsilon);
+            expectedError("'(', 'id', 'CT_INT', 'CT_FLOAT', 'PR_TRUE', 'PR_FALSE', 'CT_CHAR', 'CT_STR', 'OP_NOTUNI', 'OP_SIZE'");
         }
     }
 
@@ -1277,11 +1316,6 @@ public class Sintatico {
         else {
             expectedError("'OP_GREATER', 'OP_LESS', 'OP_GREATERT', 'OP_LESST'");
         }
-    }
-
-    public void expectedError (String expecteds) {
-        System.out.println("Error: Expected " + expecteds + " at position " + lexico.getPositionToken());
-        System.exit(1);
     }
     
 }
