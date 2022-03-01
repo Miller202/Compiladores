@@ -550,23 +550,9 @@
               [0022, 0005] (0003,               PR_END) {End}
   23      Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0023, 0005] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0023, 0011] (0049,             TERMINAL) {;}
   24  End
               [0024, 0001] (0003,               PR_END) {End}
@@ -612,7 +598,6 @@
               [0028, 0005] (0022,            PR_OUTPUT) {Output}
               [0028, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0028, 0012] (0029,               CT_STR) {"Digite o tamanho do array: "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -620,7 +605,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0028, 0012] (0029,               CT_STR) {"Digite o tamanho do array: "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -672,7 +658,6 @@
               [0032, 0005] (0022,            PR_OUTPUT) {Output}
               [0032, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0032, 0012] (0029,               CT_STR) {"Digite os valores para serem ordenados: "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -680,7 +665,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0032, 0012] (0029,               CT_STR) {"Digite os valores para serem ordenados: "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -743,7 +729,6 @@
               [0037, 0005] (0022,            PR_OUTPUT) {Output}
               [0037, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0037, 0012] (0029,               CT_STR) {"Valores adicionados: "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -751,7 +736,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0037, 0012] (0029,               CT_STR) {"Valores adicionados: "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -823,7 +809,6 @@
               [0040, 0009] (0022,            PR_OUTPUT) {Output}
               [0040, 0015] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0040, 0016] (0001,                   ID) {v}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -831,7 +816,10 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'id' IdFunCall
+              [0040, 0016] (0001,                   ID) {v}
+          IdFunCall = Id
+          Id = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -842,7 +830,6 @@
           OutputParamFat = ',' OutputParam
               [0040, 0017] (0050,                  SEP) {,}
           OutputParam = Ec OutputParamFat
-              [0040, 0019] (0029,               CT_STR) {" "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -850,7 +837,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0040, 0019] (0029,               CT_STR) {" "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -869,8 +857,9 @@
           Instructions = 'id' AtrDirFunCall Instructions
               [0043, 0005] (0001,                   ID) {shellsort}
           AtrDirFunCall = FunCall
-          FunCall = '(' ParamFun ')' ';'
+          FunCall = '(' FunCallParam
               [0043, 0014] (0045,               AB_PAR) {(}
+          FunCallParam = ParamFun ')' ';'
           ParamFun = Ec ParamFunLL
           Ec = Eb EcLL
           Eb = Tb EbLL
@@ -901,7 +890,6 @@
               [0045, 0005] (0022,            PR_OUTPUT) {Output}
               [0045, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0045, 0012] (0029,               CT_STR) {"Valores ordenados: "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -909,7 +897,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0045, 0012] (0029,               CT_STR) {"Valores ordenados: "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -981,7 +970,6 @@
               [0048, 0009] (0022,            PR_OUTPUT) {Output}
               [0048, 0015] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0048, 0016] (0001,                   ID) {v}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -989,7 +977,10 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'id' IdFunCall
+              [0048, 0016] (0001,                   ID) {v}
+          IdFunCall = Id
+          Id = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -1000,7 +991,6 @@
           OutputParamFat = ',' OutputParam
               [0048, 0017] (0050,                  SEP) {,}
           OutputParam = Ec OutputParamFat
-              [0048, 0019] (0029,               CT_STR) {" "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -1008,7 +998,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0048, 0019] (0029,               CT_STR) {" "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -1025,23 +1016,9 @@
   50
   51      Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0051, 0005] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0051, 0011] (0049,             TERMINAL) {;}
   52  End
               [0052, 0001] (0003,               PR_END) {End}

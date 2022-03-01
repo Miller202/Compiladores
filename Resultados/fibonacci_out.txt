@@ -15,7 +15,7 @@
           ParamDcFat = Epsilon
               [0001, 0027] (0046,              FEC_PAR) {)}
           BlockDc = 'Begin' Instructions 'End'
-              [0001, 0029] (0002,             PR_BEGIN) {Begin} 
+              [0001, 0029] (0002,             PR_BEGIN) {Begin}
    2      Int v1 = 0, v2 = 1, v3;
           Instructions = DcId Instructions
           DcId = VarType DcIdAtr ';'
@@ -78,8 +78,8 @@
    3
    4      If(n == 0) Begin
           Instructions = Command Instructions
-          Command = IfElse
-          IfElse = 'If' '(' Eb ')' BlockDc IfElseFat
+          Command = If
+          If = 'If' '(' Eb ')' BlockDc Else
               [0004, 0005] (0012,                PR_IF) {If}
               [0004, 0007] (0045,               AB_PAR) {(}
           Eb = Tb EbLL
@@ -119,7 +119,6 @@
               [0005, 0009] (0022,            PR_OUTPUT) {Output}
               [0005, 0015] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0005, 0016] (0001,                   ID) {n}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -127,7 +126,10 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'id' IdFunCall
+              [0005, 0016] (0001,                   ID) {n}
+          IdFunCall = Id
+          Id = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -140,31 +142,17 @@
               [0005, 0018] (0049,             TERMINAL) {;}
    6          Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0006, 0009] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0006, 0015] (0049,             TERMINAL) {;}
    7      End
               [0007, 0005] (0003,               PR_END) {End}
    8      If(n == 1) Begin
-          IfElseFat = Epsilon
+          Else = Epsilon
           Instructions = Command Instructions
-          Command = IfElse
-          IfElse = 'If' '(' Eb ')' BlockDc IfElseFat
+          Command = If
+          If = 'If' '(' Eb ')' BlockDc Else
               [0008, 0005] (0012,                PR_IF) {If}
               [0008, 0007] (0045,               AB_PAR) {(}
           Eb = Tb EbLL
@@ -204,7 +192,6 @@
               [0009, 0009] (0022,            PR_OUTPUT) {Output}
               [0009, 0015] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0009, 0016] (0029,               CT_STR) {"0, "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -212,7 +199,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0009, 0016] (0029,               CT_STR) {"0, "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -223,7 +211,6 @@
           OutputParamFat = ',' OutputParam
               [0009, 0021] (0050,                  SEP) {,}
           OutputParam = Ec OutputParamFat
-              [0009, 0023] (0001,                   ID) {n}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -231,7 +218,10 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'id' IdFunCall
+              [0009, 0023] (0001,                   ID) {n}
+          IdFunCall = Id
+          Id = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -244,29 +234,15 @@
               [0009, 0025] (0049,             TERMINAL) {;}
   10          Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0010, 0009] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0010, 0015] (0049,             TERMINAL) {;}
   11
   12      End
               [0012, 0005] (0003,               PR_END) {End}
   13      Else Begin
-          IfElseFat = 'Else' BlockDc
+          Else = 'Else' BlockDc
               [0013, 0005] (0013,              PR_ELSE) {Else}
           BlockDc = 'Begin' Instructions 'End'
               [0013, 0010] (0002,             PR_BEGIN) {Begin}
@@ -277,7 +253,6 @@
               [0014, 0009] (0022,            PR_OUTPUT) {Output}
               [0014, 0015] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0014, 0016] (0029,               CT_STR) {"0, 1, "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -285,7 +260,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0014, 0016] (0029,               CT_STR) {"0, 1, "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -355,10 +331,10 @@
   17
   18              If(n < v3) Begin
           Instructions = Command Instructions
-          Command = IfElse
-          IfElse = 'If' '(' Eb ')' BlockDc IfElseFat
+          Command = If
+          If = 'If' '(' Eb ')' BlockDc Else
               [0018, 0013] (0012,                PR_IF) {If}
-              [0018, 0015] (0045,               AB_PAR) {(} 
+              [0018, 0015] (0045,               AB_PAR) {(}
           Eb = Tb EbLL
           Tb = Ra TbLL
           Ra = Rb RaLL
@@ -377,7 +353,7 @@
           Ea = Ta EaLL
           Ta = Fa TaLL
           Fa = 'id' IdFunCall
-              [0018, 0020] (0001,                   ID) {v3} 
+              [0018, 0020] (0001,                   ID) {v3}
           IdFunCall = Id
           Id = Epsilon
           TaLL = Epsilon
@@ -391,36 +367,21 @@
               [0018, 0024] (0002,             PR_BEGIN) {Begin}
   19                  Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0019, 0017] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0019, 0023] (0049,             TERMINAL) {;}
   20              End
               [0020, 0013] (0003,               PR_END) {End}
   21
   22              Output(", ", v3);
-          IfElseFat = Epsilon
+          Else = Epsilon
           Instructions = CommandIO Instructions
           CommandIO = Output
           Output = 'Output' '(' OutputParam ')' ';'
               [0022, 0013] (0022,            PR_OUTPUT) {Output}
               [0022, 0019] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0022, 0020] (0029,               CT_STR) {", "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -428,7 +389,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0022, 0020] (0029,               CT_STR) {", "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -439,7 +401,6 @@
           OutputParamFat = ',' OutputParam
               [0022, 0024] (0050,                  SEP) {,}
           OutputParam = Ec OutputParamFat
-              [0022, 0026] (0001,                   ID) {v3}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -447,7 +408,10 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'id' IdFunCall
+              [0022, 0026] (0001,                   ID) {v3}
+          IdFunCall = Id
+          Id = Epsilon
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -547,7 +511,6 @@
               [0031, 0005] (0022,            PR_OUTPUT) {Output}
               [0031, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0031, 0012] (0029,               CT_STR) {"Digite o limite: "}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -555,7 +518,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0031, 0012] (0029,               CT_STR) {"Digite o limite: "}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -580,10 +544,11 @@
               [0032, 0013] (0049,             TERMINAL) {;}
   33      fibonacci(n);
           Instructions = 'id' AtrDirFunCall Instructions
-              [0033, 0005] (0001,                   ID) {fibonacci} 
+              [0033, 0005] (0001,                   ID) {fibonacci}
           AtrDirFunCall = FunCall
-          FunCall = '(' ParamFun ')' ';'
+          FunCall = '(' FunCallParam
               [0033, 0014] (0045,               AB_PAR) {(}
+          FunCallParam = ParamFun ')' ';'
           ParamFun = Ec ParamFunLL
           Ec = Eb EcLL
           Eb = Tb EbLL
@@ -608,23 +573,9 @@
               [0033, 0017] (0049,             TERMINAL) {;}
   34      Return;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0034, 0005] (0008,            PR_RETURN) {Return}
-          Ec = Eb EcLL
-          Eb = Tb EbLL
-          Tb = Ra TbLL
-          Ra = Rb RaLL
-          Rb = Ea RbLL
-          Ea = Ta EaLL
-          Ta = Fa TaLL
-          Fa = Epsilon
-          TaLL = Epsilon
-          EaLL = Epsilon
-          RbLL = Epsilon
-          RaLL = Epsilon
-          TbLL = Epsilon
-          EbLL = Epsilon
-          EcLL = Epsilon
+          ReturnParam = ';'
               [0034, 0011] (0049,             TERMINAL) {;}
   35  End
               [0035, 0001] (0003,               PR_END) {End}

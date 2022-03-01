@@ -16,7 +16,6 @@
               [0002, 0005] (0022,            PR_OUTPUT) {Output}
               [0002, 0011] (0045,               AB_PAR) {(}
           OutputParam = Ec OutputParamFat
-              [0002, 0012] (0029,               CT_STR) {"Hello World"}
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
@@ -24,7 +23,8 @@
           Rb = Ea RbLL
           Ea = Ta EaLL
           Ta = Fa TaLL
-          Fa = Epsilon
+          Fa = 'CT_STR'
+              [0002, 0012] (0029,               CT_STR) {"Hello World"}
           TaLL = Epsilon
           EaLL = Epsilon
           RbLL = Epsilon
@@ -37,8 +37,9 @@
               [0002, 0026] (0049,             TERMINAL) {;}
    3      Return 0;
           Instructions = Return Instructions
-          Return = 'Return' Ec ';'
+          Return = 'Return' ReturnParam
               [0003, 0005] (0008,            PR_RETURN) {Return}
+          ReturnParam = Ec ';'
           Ec = Eb EcLL
           Eb = Tb EbLL
           Tb = Ra TbLL
